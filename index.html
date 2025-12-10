@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SP Engineering | Industrial Elevators & EOT Cranes</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Tailwind CDN (v3) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              blue: '#2563eb',
+              dark: '#0f172a',
+            },
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .fade-section {
+      opacity: 0;
+      transform: translateY(24px) scale(0.975);
+      transition:
+        opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .fade-section.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Parallax items */
+    [data-parallax] {
+      will-change: transform;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Tilt cards (PATCH 23) */
+    .tilt-card {
+      will-change: transform, box-shadow;
+      transition:
+        transform 0.25s ease-out,
+        box-shadow 0.25s ease-out;
+      transform-style: preserve-3d;
+    }
+
+    .tilt-card:hover {
+      box-shadow: 0 18px 35px rgba(15, 23, 42, 0.22);
+    }
+
+    /* Lazy image fade-in (PATCH 24) */
+    .lazy-image {
+      opacity: 0;
+      transform: scale(0.98);
+      transition:
+        opacity 0.6s ease-out,
+        transform 0.6s ease-out;
+      will-change: opacity, transform;
+    }
+
+    .lazy-image.loaded {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-section {
+        transition: none;
+      }
+    }
+
+    /* Header color states */
+    .header-initial {
+      background: linear-gradient(to right, #1d4ed8, #1e40af);
+      color: #ffffff;
+    }
+
+    .header-scrolled {
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #0f172a;
+    }
+
+    /* Desktop nav link colors for header states */
+    .header-initial .nav-link {
+      color: #e5e7eb;
+      /* slate-200 */
+    }
+
+    .header-initial .nav-link:hover {
+      color: #bfdbfe;
+      /* blue-200 */
+    }
+
+    .header-scrolled .nav-link {
+      color: #374151;
+      /* slate-700 */
+    }
+
+    .header-scrolled .nav-link:hover {
+      color: #2563eb;
+      /* brand blue */
+    }
+
+    .header-initial .logo-text-inner {
+      color: #ffffff !important;
+    }
+
+    .header-scrolled .logo-text-inner {
+      color: #0f172a !important;
+    }
+
+    .relative.group:hover>div {
+      display: flex !important;
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 text-[16px] sm:text-lg">
+  <!-- Header -->
+  <header id="pageHeader"
+    class="sticky top-0 z-40 border-b border-slate-200 backdrop-blur transition-shadow header-initial">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between py-8">
+        <!-- Logo -->
+        <a href="#hero" class="flex items-center gap-3">
+          <img src="assets/images/SP_ENG_LOGO.webp" alt="SP Engineering Logo"
+            class="h-16 w-auto object-contain" loading="lazy" />
+          <p class="text-lg sm:text-xl font-semibold logo-text transition-colors">
+            <span class="logo-text-inner">SP Engineering</span>
+          </p>
+        </a>
+
+        <!-- Mobile toggle -->
+        <button id="navToggle"
+          class="md:hidden inline-flex items-center justify-center p-2 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-100 transition"
+          aria-label="Toggle navigation menu" type="button">
+          <i class="fas fa-bars text-sm"></i>
+        </button>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:block">
+          <ul class="flex items-center gap-6 text-lg font-medium">
+            <li>
+              <a href="#hero" aria-current="page" class="nav-link inline-flex items-center gap-2 transition">
+                <i class="fas fa-home text-xs"></i>
+                Home
+              </a>
+            </li>
+            <li class="relative group">
+              <button class="nav-link inline-flex items-center gap-2 transition focus:outline-none">
+                <i class="fas fa-info-circle text-xs"></i>
+                About
+                <i class="fas fa-chevron-down text-[10px] mt-[1px]"></i>
+              </button>
+              <div
+                class="absolute left-0 mt-3 hidden min-w-[190px] flex-col rounded-xl border border-slate-200 bg-white shadow-lg group-hover:flex">
+                <a href="#about"
+                  class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition">Company</a>
+                <a href="#vision-mission"
+                  class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition">Vision &amp;
+                  Mission</a>
+              </div>
+            </li>
+            <li class="relative group">
+              <button class="nav-link inline-flex items-center gap-2 transition focus:outline-none">
+                <i class="fas fa-briefcase text-xs"></i>
+                Services
+                <i class="fas fa-chevron-down text-[10px] mt-[1px]"></i>
+              </button>
+              <div
+                class="absolute left-1/2 mt-3 hidden w-[560px] -translate-x-1/2 rounded-2xl border border-slate-200 bg-white shadow-xl group-hover:flex">
+                <div class="grid grid-cols-2 gap-4 p-4">
+                  <div class="space-y-2">
+                    <p class="text-xs font-semibold text-slate-500 uppercase">Key Services</p>
+                    <a href="#services"
+                      class="flex items-start gap-3 rounded-xl px-3 py-2 hover:bg-slate-50 transition">
+                      <span
+                        class="mt-1 h-8 w-8 flex items-center justify-center rounded-full bg-blue-50 text-brand-blue border border-blue-100">
+                        <i class="fas fa-elevator text-sm"></i>
+                      </span>
+                      <span class="text-xs">
+                        <span class="block font-semibold text-slate-800">Industrial Elevators</span>
+                        <span class="block text-slate-500">Erection, commissioning &amp; AMC support.</span>
+                      </span>
+                    </a>
+                    <a href="#services"
+                      class="flex items-start gap-3 rounded-xl px-3 py-2 hover:bg-slate-50 transition">
+                      <span
+                        class="mt-1 h-8 w-8 flex items-center justify-center rounded-full bg-blue-50 text-brand-blue border border-blue-100">
+                        <i class="fas fa-crane text-sm"></i>
+                      </span>
+                      <span class="text-xs">
+                        <span class="block font-semibold text-slate-800">EOT Crane Erection</span>
+                        <span class="block text-slate-500">Structure, alignment, load testing &amp; maintenance.</span>
+                      </span>
+                    </a>
+                    <a href="#services"
+                      class="flex items-start gap-3 rounded-xl px-3 py-2 hover:bg-slate-50 transition">
+                      <span
+                        class="mt-1 h-8 w-8 flex items-center justify-center rounded-full bg-blue-50 text-brand-blue border border-blue-100">
+                        <i class="fas fa-bolt text-sm"></i>
+                      </span>
+                      <span class="text-xs">
+                        <span class="block font-semibold text-slate-800">Industrial Electrical Works</span>
+                        <span class="block text-slate-500">Panels, wiring and control integration.</span>
+                      </span>
+                    </a>
+                  </div>
+                  <div class="space-y-3 border-l border-slate-100 pl-4">
+                    <p class="text-xs font-semibold text-slate-500 uppercase">Why work with us</p>
+                    <p class="text-xs text-slate-600">
+                      Safe execution, standards-compliant installations and responsive AMC support tailored to working
+                      plants and shutdown windows.
+                    </p>
+                    <p class="text-xs text-slate-500">
+                      Talk to us for industrial elevator, EOT crane or electrical scopes at your facility.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <a href="#clients" class="nav-link inline-flex items-center gap-2 transition">
+                <i class="fas fa-building text-xs"></i>
+                Clients
+              </a>
+            </li>
+            <li>
+              <a href="#contact" class="nav-link inline-flex items-center gap-2 transition">
+                <i class="fas fa-phone-alt text-xs"></i>
+                Contact
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Mobile Nav -->
+      <nav id="navMenuMobile" class="md:hidden hidden pb-3 border-t border-slate-200 text-lg font-medium">
+        <ul class="flex flex-col gap-1 pt-3">
+          <li><a href="#hero" class="block px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-700">Home</a></li>
+          <li><a href="#about" class="block px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-700">About</a></li>
+          <li><a href="#vision-mission"
+              class="block px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-700">Vision &amp; Mission</a></li>
+          <li><a href="#services"
+              class="block px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-700">Services</a></li>
+          <li><a href="#clients"
+              class="block px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-700">Clients</a></li>
+          <li><a href="#contact"
+              class="block px-3 py-2.5 rounded-lg hover:bg-slate-100 text-slate-700">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Scroll progress bar -->
+  <div id="scrollProgress" class="fixed top-0 left-0 h-[3px] bg-blue-500 z-50 w-0"></div>
+
+  <!-- Hero -->
+  <section id="hero" class="relative overflow-hidden bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="grid lg:grid-cols-[1.2fr,1fr] gap-14 items-center py-20 sm:py-28 lg:py-32 fade-section">
+        <!-- Text -->
+        <div>
+          <p
+            class="inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-1.5 text-sm font-semibold text-brand-blue mb-4">
+            <span class="h-1.5 w-1.5 rounded-full bg-brand-blue"></span>
+            Industrial Elevators &amp; EOT Cranes Specialist
+          </p>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-semibold text-slate-900 leading-[1.15] mb-6">
+            Reliable engineering for
+            <span class="text-brand-blue">
+              Industrial Elevators
+            </span>
+            &amp; EOT Cranes
+          </h1>
+          <p class="text-base sm:text-lg text-slate-600 mb-8 max-w-2xl">
+            SP Engineering provides installation, erection and maintenance of industrial elevators, EOT cranes and
+            electrical systems with a strong focus on safety, compliance and uptime for your plant operations.
+          </p>
+          <div class="flex flex-wrap gap-3 mb-5">
+            <a href="#contact"
+              class="inline-flex items-center gap-2 rounded-full bg-brand-blue magnetic-btn px-7 py-3 text-base font-semibold text-white shadow-md hover:bg-blue-700 active:scale-[0.98] transition">
+              <i class="fas fa-phone"></i>
+              Get a Project Consultation
+            </a>
+            <a href="#services"
+              class="inline-flex items-center gap-2 rounded-full border border-brand-blue px-7 py-3 text-base font-semibold text-brand-blue bg-white hover:bg-blue-50 active:scale-[0.98] transition magnetic-btn">
+              <i class="fas fa-arrow-right"></i>
+              View Services
+            </a>
+          </div>
+          <!-- Trust row -->
+          <div class="flex flex-wrap items-center gap-3 text-xs sm:text-sm text-slate-500">
+            <span class="font-medium text-slate-600">Trusted by:</span>
+            <span class="inline-flex items-center gap-2">
+              <span class="h-1 w-1 rounded-full bg-slate-300"></span> Maespro Elevatori (Italy)
+            </span>
+            <span class="inline-flex items-center gap-2">
+              <span class="h-1 w-1 rounded-full bg-slate-300"></span> Reliance Industries Ltd.
+            </span>
+            <span class="inline-flex items-center gap-2">
+              <span class="h-1 w-1 rounded-full bg-slate-300"></span> Tata Chemicals
+            </span>
+          </div>
+        </div>
+
+        <!-- Visual -->
+        <div class="relative">
+          <div class="rounded-3xl bg-gradient-to-br from-blue-600 to-sky-500 p-[1px] shadow-xl shadow-blue-100/40"
+            data-parallax="0.15">
+            <div class="rounded-3xl bg-white p-3 sm:p-4">
+              <img src="assets/images/hero-industrial.webp" alt="Industrial elevator and crane environment"
+                class="h-64 w-full object-cover rounded-2xl lazy-image" loading="lazy" />
+            </div>
+          </div>
+          <!-- Overlay cards -->
+          <div class="absolute -bottom-5 left-4 sm:left-6" data-parallax="0.25">
+            <div
+              class="rounded-2xl bg-white shadow-lg border border-slate-200 px-4 py-3 flex items-center gap-3 text-xs sm:text-sm">
+              <div class="h-9 w-9 flex items-center justify-center rounded-full bg-blue-50 text-brand-blue">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-slate-800">12+ Years Experience</p>
+                <p class="text-slate-500">Field-tested solutions</p>
+              </div>
+            </div>
+          </div>
+          <div class="absolute -top-4 right-0 sm:right-4" data-parallax="0.2">
+            <div class="rounded-2xl bg-white shadow-lg border border-slate-200 px-4 py-3 text-xs sm:text-sm">
+              <p class="font-semibold text-slate-800 flex items-center gap-2">
+                <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+                AMC &amp; lifecycle support
+              </p>
+              <p class="text-slate-500">24/7 service readiness</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 pb-10 sm:pb-12 fade-section">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-7 flex flex-col items-center shadow-sm">
+          <div class="mb-2 h-9 w-9 flex items-center justify-center rounded-full bg-blue-50 text-brand-blue">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <span class="stat-number text-2xl sm:text-3xl font-semibold text-brand-blue" data-count="12">0</span>
+          <span class="mt-1 text-xs sm:text-sm text-slate-600">Years of Experience</span>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-7 flex flex-col items-center shadow-sm">
+          <div class="mb-2 h-9 w-9 flex items-center justify-center rounded-full bg-blue-50 text-brand-blue">
+            <i class="fas fa-diagram-project"></i>
+          </div>
+          <span class="stat-number text-2xl sm:text-3xl font-semibold text-brand-blue" data-count="130">0</span>
+          <span class="mt-1 text-xs sm:text-sm text-slate-600">Projects Completed</span>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-7 flex flex-col items-center shadow-sm">
+          <div class="mb-2 h-9 w-9 flex items-center justify-center rounded-full bg-blue-50 text-brand-blue">
+            <i class="fas fa-user-check"></i>
+          </div>
+          <span class="stat-number text-2xl sm:text-3xl font-semibold text-brand-blue" data-count="15">0</span>
+          <span class="mt-1 text-xs sm:text-sm text-slate-600">Key Industrial Clients</span>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-7 flex flex-col items-center shadow-sm">
+          <div class="mb-2 h-9 w-9 flex items-center justify-center rounded-full bg-blue-50 text-brand-blue">
+            <i class="fas fa-headset"></i>
+          </div>
+          <span class="stat-number text-2xl sm:text-3xl font-semibold text-brand-blue" data-count="24">0</span>
+          <span class="mt-1 text-xs sm:text-sm text-slate-600">Hour Support Coverage</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+      <div class="grid lg:grid-cols-[1.4fr,1fr] gap-10 items-start">
+        <!-- Text -->
+        <div class="fade-section">
+          <p class="text-xs font-semibold tracking-wide text-brand-blue mb-1">ABOUT SP ENGINEERING</p>
+          <h2 class="text-2xl sm:text-3xl font-semibold text-slate-900 mb-3">
+            Industrial field expertise with a safety-first mindset.
+          </h2>
+          <div class="w-full flex items-center justify-center my-4">
+            <div class="h-[2px] w-24 bg-gradient-to-r from-slate-300 via-slate-500 to-slate-300"></div>
+          </div>
+
+          <p class="text-sm sm:text-base text-slate-600 mb-4">
+            SP Engineering is a specialised industrial service provider focused on industrial elevator erection,
+            EOT crane installation and maintenance, and associated electrical works. We work closely with OEMs and
+            plant engineering teams to ensure safe, reliable and standards-compliant operations.
+          </p>
+          <p class="text-sm sm:text-base text-slate-600 mb-4">
+            From new projects to retrofits and annual maintenance contracts, our team combines strong technical
+            competence with disciplined on-site execution. We support plants across manufacturing, chemicals,
+            process industry and other heavy-duty environments.
+          </p>
+          <div class="grid sm:grid-cols-2 gap-4 mt-4">
+            <div class="rounded-xl border border-slate-200 bg-slate-50 p-6">
+              <h3 class="text-sm font-semibold text-slate-900 mb-2">What we are known for</h3>
+              <ul class="text-xs sm:text-sm text-slate-600 space-y-1.5">
+                <li class="flex items-start gap-2">
+                  <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-blue"></span>
+                  <span>Standards-compliant elevator &amp; crane installations.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-blue"></span>
+                  <span>Measured, safe execution at site.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-blue"></span>
+                  <span>Structured AMC &amp; responsive breakdown support.</span>
+                </li>
+              </ul>
+            </div>
+            <div class="rounded-xl border border-slate-200 bg-slate-50 p-6">
+              <h3 class="text-sm font-semibold text-slate-900 mb-2">Industries we support</h3>
+              <ul class="text-xs sm:text-sm text-slate-600 space-y-1.5">
+                <li>Refineries &amp; process plants</li>
+                <li>Chemical &amp; agrochemical units</li>
+                <li>Manufacturing facilities</li>
+                <li>Large industrial campuses</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual card -->
+        <div class="fade-section">
+          <div
+            class="rounded-3xl bg-gradient-to-br from-blue-100 via-sky-50 to-white p-[1px] border border-slate-200 shadow-md">
+            <div class="rounded-3xl bg-white p-7">
+              <h3 class="text-sm font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                <span
+                  class="h-7 w-7 flex items-center justify-center rounded-full bg-blue-50 text-brand-blue text-xs">
+                  <i class="fas fa-clipboard-check"></i>
+                </span>
+                Execution principles
+              </h3>
+              <ul class="text-xs sm:text-sm text-slate-600 space-y-2">
+                <li>• Zero-compromise approach to safety and compliance.</li>
+                <li>• Detailed planning before every erection or shutdown activity.</li>
+                <li>• Documentation, checklists and OEM-guided procedures.</li>
+                <li>• Transparent communication with plant engineering teams.</li>
+              </ul>
+              <p class="mt-4 text-xs text-slate-500">
+                “Our objective is simple – installations that you can rely on, shift after shift.”
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Team -->
+  <section id="team" class="bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+      <div class="text-center max-w-2xl mx-auto mb-10 fade-section">
+        <p class="text-xs font-semibold tracking-wide text-brand-blue mb-1">
+          CORE TEAM
+        </p>
+        <h2 class="text-2xl sm:text-3xl font-semibold text-slate-900 mb-2">
+          The team behind SP Engineering.
+        </h2>
+        <div class="w-full flex items-center justify-center my-4">
+          <div class="h-[2px] w-24 bg-gradient-to-r from-slate-300 via-slate-500 to-slate-300"></div>
+        </div>
+
+        <p class="text-sm sm:text-base text-slate-600">
+          Experienced engineering and field leaders responsible for safe execution,
+          project delivery and long-term support.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 fade-section">
+        <!-- Member 1 -->
+        <article
+          class="bg-slate-50 border border-slate-200 rounded-2xl p-7 flex flex-col items-center text-center shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:scale-[1.01] tilt-card">
+          <div class="mb-4">
+            <img src="assets/images/leader_1.webp" alt="Director - SP Engineering"
+              class="h-24 w-24 rounded-full object-cover border-2 border-blue-100 shadow-sm lazy-image" />
+          </div>
+          <h3 class="text-base sm:text-lg font-semibold text-slate-900">
+            A. Ayyappan
+          </h3>
+          <p class="text-xs uppercase tracking-wide text-brand-blue mb-2">
+            Founder &amp; Director
+          </p>
+          <p class="text-xs sm:text-sm text-slate-600 mb-3">
+            Leads overall operations, project execution and client relationships for
+            industrial elevator and EOT crane projects.
+          </p>
+          <div class="flex items-center gap-3 text-xs text-slate-500">
+            <span class="inline-flex items-center gap-1">
+              <i class="fas fa-phone-alt text-[11px]"></i> +91 96625 01440
+            </span>
+          </div>
+        </article>
+
+        <!-- Member 2 -->
+        <article
+          class="bg-slate-50 border border-slate-200 rounded-2xl p-7 flex flex-col items-center text-center shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:scale-[1.01] tilt-card">
+          <div class="mb-4">
+            <img src="assets/images/leader_2.webp" alt="Technical Head - SP Engineering"
+              class="h-24 w-24 rounded-full object-cover border-2 border-blue-100 shadow-sm lazy-image" />
+          </div>
+          <h3 class="text-base sm:text-lg font-semibold text-slate-900">
+            S. Prakash
+          </h3>
+          <p class="text-xs uppercase tracking-wide text-brand-blue mb-2">
+            Technical Head &amp; AMC Lead
+          </p>
+          <p class="text-xs sm:text-sm text-slate-600 mb-3">
+            Oversees field engineering, commissioning, safety practices and
+            annual maintenance contracts across client sites.
+          </p>
+          <div class="flex items-center gap-3 text-xs text-slate-500">
+            <span class="inline-flex items-center gap-1">
+              <i class="fas fa-envelope text-[11px]"></i> support@spengineering.com
+            </span>
+          </div>
+        </article>
+
+        <!-- Member 3 -->
+        <article
+          class="bg-slate-50 border border-slate-200 rounded-2xl p-7 flex flex-col items-center text-center shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:scale-[1.01] tilt-card">
+          <div class="mb-4">
+            <img src="assets/images/leader_3.webp" alt="Project Coordinator - SP Engineering"
+              class="h-24 w-24 rounded-full object-cover border-2 border-blue-100 shadow-sm lazy-image" />
+          </div>
+          <h3 class="text-base sm:text-lg font-semibold text-slate-900">
+            Core Project Team
+          </h3>
+          <p class="text-xs uppercase tracking-wide text-brand-blue mb-2">
+            Project Coordination &amp; Site Support
+          </p>
+          <p class="text-xs sm:text-sm text-slate-600 mb-3">
+            Coordinates site activities, documentation and logistics for project
+            execution within planned shutdown windows.
+          </p>
+          <div class="flex items-center gap-3 text-xs text-slate-500">
+            <span class="inline-flex items-center gap-1">
+              <i class="fas fa-industry text-[11px]"></i> Elevators &amp; EOT Cranes
+            </span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vision & Mission -->
+  <section id="vision-mission" class="bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+      <div class="text-center max-w-2xl mx-auto mb-10 fade-section">
+        <p class="text-xs font-semibold tracking-wide text-brand-blue mb-1">VISION &amp; MISSION</p>
+        <h2 class="text-2xl sm:text-3xl font-semibold text-slate-900 mb-2">
+          Long-term commitment to safe industrial mobility.
+        </h2>
+        <div class="w-full flex items-center justify-center my-4">
+          <div class="h-[2px] w-24 bg-gradient-to-r from-slate-300 via-slate-500 to-slate-300"></div>
+        </div>
+
+        <p class="text-sm sm:text-base text-slate-600">
+          We aim to be the engineering partner of choice for industrial elevators and lifting systems, delivering
+          consistency, safety and lifecycle value.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 fade-section">
+        <div
+          class="bg-white border border-slate-200 rounded-2xl p-7 sm:p-9 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:scale-[1.01]">
+          <div class="flex items-center gap-3 mb-3">
+            <div
+              class="h-10 w-10 flex items-center justify-center rounded-full bg-blue-50 text-brand-blue border border-blue-100">
+              <i class="fas fa-eye"></i>
+            </div>
+            <h3 class="text-lg font-semibold text-slate-900">Our Vision</h3>
+          </div>
+          <p class="text-sm sm:text-base text-slate-600 mb-3">
+            To be recognised as a reliable engineering partner for industrial elevators and crane systems, known for
+            safe execution, dependable service and technically sound solutions.
+          </p>
+          <ul class="text-xs sm:text-sm text-slate-600 space-y-1.5 mt-2">
+            <li>• Elevators and cranes that match the operational demands of modern plants.</li>
+            <li>• Installations that integrate cleanly with plant layouts and utilities.</li>
+            <li>• Systems that are maintainable across their service life.</li>
+          </ul>
+        </div>
+
+        <div
+          class="bg-white border border-slate-200 rounded-2xl p-7 sm:p-9 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:scale-[1.01]">
+          <div class="flex items-center gap-3 mb-3">
+            <div
+              class="h-10 w-10 flex items-center justify-center rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100">
+              <i class="fas fa-bullseye"></i>
+            </div>
+            <h3 class="text-lg font-semibold text-slate-900">Our Mission</h3>
+          </div>
+          <p class="text-sm sm:text-base text-slate-600 mb-3">
+            To deliver structured, safe and responsive services for elevator and crane projects by aligning
+            engineering know-how, experienced manpower and disciplined project management.
+          </p>
+          <ul class="text-xs sm:text-sm text-slate-600 space-y-1.5 mt-2">
+            <li>• Execute work with zero-incident mindset.</li>
+            <li>• Meet commitments on timelines and quality.</li>
+            <li>• Provide prompt AMC and breakdown support.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+      <div class="text-center max-w-2xl mx-auto mb-10 fade-section">
+        <p class="text-xs font-semibold tracking-wide text-brand-blue mb-1">SERVICES</p>
+        <h2 class="text-2xl sm:text-3xl font-semibold text-slate-900 mb-2">
+          Complete solutions from erection to maintenance.
+        </h2>
+        <div class="w-full flex items-center justify-center my-4">
+          <div class="h-[2px] w-24 bg-gradient-to-r from-slate-300 via-slate-500 to-slate-300"></div>
+        </div>
+
+        <p class="text-sm sm:text-base text-slate-600">
+          We support you through the full lifecycle of industrial elevators, EOT cranes and associated electrical
+          systems.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 fade-section">
+        <!-- Service 1 -->
+        <article
+          class="bg-white border border-slate-200 rounded-2xl overflow-hidden flex flex-col shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:scale-[1.01] tilt-card">
+          <div class="relative">
+            <img src="assets/images/INDUSTRIAL_ELEVATOR.webp" alt="Industrial elevator installation"
+              class="h-40 w-full object-cover lazy-image" loading="lazy" />
+            <span
+              class="absolute top-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-brand-blue shadow">
+              Erection &amp; AMC
+            </span>
+          </div>
+          <div class="p-7 flex flex-col flex-1">
+            <h3 class="text-lg font-semibold text-slate-900 mb-2">
+              Industrial Elevator Erection &amp; Maintenance
+            </h3>
+            <p class="text-sm text-slate-600 flex-1">
+              Complete installation, commissioning and maintenance of industrial elevators in line with OEM guidelines
+              and safety regulations. Includes retrofits, modernisation and structured AMC plans tailored to your
+              plant.
+            </p>
+            <a href="#contact"
+              class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-brand-blue hover:text-blue-700">
+              Enquire about this service
+              <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- Service 2 -->
+        <article
+          class="bg-white border border-slate-200 rounded-2xl overflow-hidden flex flex-col shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:scale-[1.01] tilt-card">
+          <div class="relative">
+            <img src="assets/images/EOT_Crane.webp" alt="EOT Crane erection and maintenance"
+              class="h-40 w-full object-cover lazy-image" loading="lazy" />
+            <span
+              class="absolute top-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-brand-blue shadow">
+              Structure &amp; Commissioning
+            </span>
+          </div>
+          <div class="p-7 flex flex-col flex-1">
+            <h3 class="text-lg font-semibold text-slate-900 mb-2">
+              EOT Crane Erection &amp; Maintenance
+            </h3>
+            <p class="text-sm text-slate-600 flex-1">
+              Structural erection, alignment, load testing and periodic maintenance of EOT cranes, ensuring safe
+              material handling and long service life. Activities planned around shutdown windows and safety norms.
+            </p>
+            <a href="#contact"
+              class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-brand-blue hover:text-blue-700">
+              Plan a crane project
+              <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- Service 3 -->
+        <article
+          class="bg-white border border-slate-200 rounded-2xl overflow-hidden flex flex-col shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:scale-[1.01] tilt-card">
+          <div class="relative">
+            <img src="assets/images/Electrical.webp" alt="Industrial electrical services"
+              class="h-40 w-full object-cover lazy-image" loading="lazy" />
+            <span
+              class="absolute top-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-brand-blue shadow">
+              Panels &amp; Wiring
+            </span>
+          </div>
+          <div class="p-7 flex flex-col flex-1">
+            <h3 class="text-lg font-semibold text-slate-900 mb-2">
+              Industrial Electrical Works
+            </h3>
+            <p class="text-sm text-slate-600 flex-1">
+              Electrical panel installation, cable routing, control wiring and integration for elevators and cranes,
+              executed with strict attention to safety, segregation and maintainability standards.
+            </p>
+            <a href="#contact"
+              class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-brand-blue hover:text-blue-700">
+              Discuss your electrical scope
+              <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Clients -->
+  <section id="clients" class="bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+
+      <!-- Heading -->
+      <div class="text-center max-w-3xl mx-auto mb-10 fade-section">
+        <p class="text-xs font-semibold tracking-wide text-brand-blue mb-2">CLIENTS</p>
+        <h2 class="text-3xl sm:text-4xl font-semibold text-slate-900 mb-4 leading-tight">
+          Trusted engineering partner for leading industries.
+        </h2>
+        <div class="w-full flex items-center justify-center my-4">
+          <div class="h-[2px] w-24 bg-gradient-to-r from-slate-300 via-slate-500 to-slate-300"></div>
+        </div>
+
+        <p class="text-base text-slate-600">
+          SP Engineering has supported Indian plants and international OEMs including
+          <span class="font-semibold text-brand-blue">Maespro Elevatori (Italy)</span>
+          in executing and maintaining critical elevator and crane systems.
+        </p>
+      </div>
+
+      <!-- Client List -->
+      <div class="fade-section bg-white rounded-2xl p-8 sm:p-10 border border-slate-200 shadow-sm">
+        <ul class="space-y-4">
+
+          <li
+            class="group flex items-center gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-blue-50 hover:translate-x-3 hover:scale-[1.01]">
+            <span class="h-7 w-7 flex items-center justify-center rounded-full bg-amber-400 text-white">
+              <i class="fas fa-check text-sm"></i>
+            </span>
+            <p class="text-slate-800 text-sm sm:text-base font-medium">
+              M/S. Reliance Industries Ltd, Jamnagar
+            </p>
+          </li>
+
+          <li
+            class="group flex items-center gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-blue-50 hover:translate-x-3 hover:scale-[1.01]">
+            <span class="h-7 w-7 flex items-center justify-center rounded-full bg-amber-400 text-white">
+              <i class="fas fa-check text-sm"></i>
+            </span>
+            <p class="text-slate-800 text-sm sm:text-base font-medium">
+              Tata Chemicals Ltd, Mithapur
+            </p>
+          </li>
+
+          <li
+            class="group flex items-center gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-blue-50 hover:translate-x-3 hover:scale-[1.01]">
+            <span class="h-7 w-7 flex items-center justify-center rounded-full bg-amber-400 text-white">
+              <i class="fas fa-check text-sm"></i>
+            </span>
+            <p class="text-slate-800 text-sm sm:text-base font-medium">
+              GSECL, TPS, Sikka, Jamnagar
+            </p>
+          </li>
+
+          <li
+            class="group flex items-center gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-blue-50 hover:translate-x-3 hover:scale-[1.01]">
+            <span class="h-7 w-7 flex items-center justify-center rounded-full bg-amber-400 text-white">
+              <i class="fas fa-check text-sm"></i>
+            </span>
+            <p class="text-slate-800 text-sm sm:text-base font-medium">
+              Maspero Elevatori, Italy
+            </p>
+          </li>
+
+          <li
+            class="group flex items-center gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-blue-50 hover:translate-x-3 hover:scale-[1.01]">
+            <span class="h-7 w-7 flex items-center justify-center rounded-full bg-amber-400 text-white">
+              <i class="fas fa-check text-sm"></i>
+            </span>
+            <p class="text-slate-800 text-sm sm:text-base font-medium">
+              Maspero India Pvt Ltd
+            </p>
+          </li>
+
+          <li
+            class="group flex items-center gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-blue-50 hover:translate-x-3 hover:scale-[1.01]">
+            <span class="h-7 w-7 flex items-center justify-center rounded-full bg-amber-400 text-white">
+              <i class="fas fa-check text-sm"></i>
+            </span>
+            <p class="text-slate-800 text-sm sm:text-base font-medium">
+              Finetech Corporation Pvt Ltd, Motikhavdi
+            </p>
+          </li>
+
+          <li
+            class="group flex items-center gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-blue-50 hover:translate-x-3 hover:scale-[1.01]">
+            <span class="h-7 w-7 flex items-center justify-center rounded-full bg-amber-400 text-white">
+              <i class="fas fa-check text-sm"></i>
+            </span>
+            <p class="text-slate-800 text-sm sm:text-base font-medium">
+              Gujarat Pipavav Port Ltd, Gujarat
+            </p>
+          </li>
+
+          <li
+            class="group flex items-center gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-blue-50 hover:translate-x-3 hover:scale-[1.01]">
+            <span class="h-7 w-7 flex items-center justify-center rounded-full bg-amber-400 text-white">
+              <i class="fas fa-check text-sm"></i>
+            </span>
+            <p class="text-slate-800 text-sm sm:text-base font-medium">
+              Bharat Petroleum Corporation, Kochi, Kerala
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+      <div class="grid lg:grid-cols-2 gap-10 items-start">
+        <!-- LEFT: Contact information -->
+        <div class="space-y-6 fade-section">
+          <h2 class="text-2xl sm:text-3xl font-semibold mb-2">
+            Contact Information
+          </h2>
+          <div class="w-full flex items-center justify-center my-4">
+            <div class="h-[2px] w-24 bg-gradient-to-r from-slate-300 via-slate-500 to-slate-300"></div>
+          </div>
+
+          <p class="text-sm sm:text-base text-blue-100 max-w-md">
+            Reach out to us for industrial elevator, EOT crane or electrical
+            system requirements. We’ll get back to you with the next steps.
+          </p>
+
+          <!-- Office Address -->
+          <div class="flex gap-4 items-start">
+            <div
+              class="mt-1 h-10 w-10 flex items-center justify-center rounded-full bg-amber-400 text-white shadow-lg">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="text-sm">
+              <p class="font-semibold mb-1">Office Address</p>
+              <p class="leading-relaxed text-blue-100">
+                S.P.ENGINEERING<br />
+                No.401, VRAJ MANGAL APPARTMENT<br />
+                11/1, PATEL COLONY,<br />
+                JAMNAGAR, GUJARAT 361008
+              </p>
+            </div>
+          </div>
+
+          <!-- Phone -->
+          <div class="flex gap-4 items-start">
+            <div
+              class="mt-1 h-10 w-10 flex items-center justify-center rounded-full bg-amber-400 text-white shadow-lg">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="text-sm">
+              <p class="font-semibold mb-1">Phone Number</p>
+              <p class="text-blue-100">+91 9662501440</p>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="flex gap-4 items-start">
+            <div
+              class="mt-1 h-10 w-10 flex items-center justify-center rounded-full bg-amber-400 text-white shadow-lg">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="text-sm">
+              <p class="font-semibold mb-1">Email Address</p>
+              <p class="text-blue-100">spengineering60@gmail.com</p>
+            </div>
+          </div>
+
+          <!-- Business Hours -->
+          <div class="flex gap-4 items-start">
+            <div
+              class="mt-1 h-10 w-10 flex items-center justify-center rounded-full bg-amber-400 text-white shadow-lg">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="text-sm">
+              <p class="font-semibold mb-1">Business Hours</p>
+              <p class="text-blue-100">Monday – Friday: 9:00 AM – 6:00 PM</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Form -->
+        <div
+          class="bg-white/10 border border-white/10 rounded-3xl px-6 sm:px-8 py-6 sm:py-8 shadow-2xl shadow-blue-900/40 backdrop-blur fade-section">
+          <form id="contactForm" class="space-y-4" novalidate>
+            <!-- Row 1: Name -->
+            <div>
+              <label for="name"
+                class="block text-xs font-semibold mb-1 uppercase tracking-wide text-blue-100">
+                Name *
+              </label>
+              <input type="text" id="name" name="name" autocomplete="name" required
+                class="w-full rounded-xl border border-white/20 bg-white/5 px-3 py-2.5 text-sm text-white placeholder:text-blue-100/60 focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-transparent" />
+              <p id="error-name" class="mt-1 text-xs text-amber-200 hidden">
+                Please enter your name.
+              </p>
+            </div>
+
+            <!-- Row 2: Email + Phone -->
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label for="email"
+                  class="block text-xs font-semibold mb-1 uppercase tracking-wide text-blue-100">
+                  Email Address *
+                </label>
+                <input type="email" id="email" name="email" autocomplete="email" required
+                  class="w-full rounded-xl border border-white/20 bg-white/5 px-3 py-2.5 text-sm text-white placeholder:text-blue-100/60 focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-transparent" />
+                <p id="error-email" class="mt-1 text-xs text-amber-200 hidden">
+                  Please enter a valid email.
+                </p>
+              </div>
+              <div>
+                <label for="phone"
+                  class="block text-xs font-semibold mb-1 uppercase tracking-wide text-blue-100">
+                  Phone Number
+                </label>
+                <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel"
+                  class="w-full rounded-xl border border-white/20 bg-white/5 px-3 py-2.5 text-sm text-white placeholder:text-blue-100/60 focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-transparent" />
+                <p id="error-phone" class="mt-1 text-xs text-amber-200 hidden">
+                  Please enter a valid phone number.
+                </p>
+              </div>
+            </div>
+
+            <!-- Row 3: Company -->
+            <div>
+              <label for="company"
+                class="block text-xs font-semibold mb-1 uppercase tracking-wide text-blue-100">
+                Company Name
+              </label>
+              <input type="text" id="company" name="company"
+                class="w-full rounded-xl border border-white/20 bg-white/5 px-3 py-2.5 text-sm text-white placeholder:text-blue-100/60 focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-transparent" />
+            </div>
+
+            <!-- Row 4: Service select -->
+            <div>
+              <label for="service"
+                class="block text-xs font-semibold mb-1 uppercase tracking-wide text-blue-100">
+                Service Required
+              </label>
+              <select id="service" name="service"
+                class="w-full rounded-xl border border-white/20 bg-white/5 px-3 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-transparent">
+                <option value="" class="text-slate-700">Select a service</option>
+                <option value="elevator">Industrial Elevator Erection &amp; AMC</option>
+                <option value="eot-crane">EOT Crane Erection &amp; Maintenance</option>
+                <option value="electrical">Industrial Electrical Works</option>
+                <option value="other">Other / Multiple services</option>
+              </select>
+            </div>
+
+            <!-- Row 5: Project details -->
+            <div>
+              <label for="message"
+                class="block text-xs font-semibold mb-1 uppercase tracking-wide text-blue-100">
+                Project Details *
+              </label>
+              <textarea id="message" name="message" rows="4" required
+                class="w-full rounded-xl border border-white/20 bg-white/5 px-3 py-2.5 text-sm text-white placeholder:text-blue-100/60 focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-transparent"
+                placeholder="Please describe your project requirements..."></textarea>
+              <p id="error-message" class="mt-1 text-xs text-amber-200 hidden">
+                Please describe your requirement.
+              </p>
+            </div>
+
+            <!-- Submit -->
+            <div class="flex items-center justify-end pt-2">
+              <button type="submit"
+                class="inline-flex items-center gap-2 rounded-full bg-amber-400 px-6 py-2.5 text-sm font-semibold text-blue-900 shadow-lg hover:bg-amber-300 active:scale-[0.98] transition magnetic-btn">
+                <i class="fas fa-paper-plane text-xs"></i>
+                Send Message
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+      <div class="grid md:grid-cols-3 gap-8 mb-6">
+        <!-- Brand -->
+        <div>
+          <div class="flex items-center gap-3 mb-2">
+            <div
+              class="h-9 w-9 flex items-center justify-center rounded-full bg-slate-800 border border-slate-700 text-brand-blue">
+              <i class="fas fa-industry"></i>
+            </div>
+            <div>
+              <p class="text-sm font-semibold">SP Engineering</p>
+              <p class="text-xs text-slate-400">Industrial Elevators, EOT Cranes &amp; Electrical Systems</p>
+            </div>
+          </div>
+          <p class="text-xs text-slate-400 mt-2">
+            Engineering, erection and maintenance services for industrial elevators and lifting systems with a clear
+            focus on safety and reliability.
+          </p>
+        </div>
+
+        <!-- Quick links -->
+        <div>
+          <p class="text-sm font-semibold mb-2">Quick Links</p>
+          <ul class="space-y-1 text-xs text-slate-300">
+            <li><a href="#hero" class="hover:text-blue-300">Home</a></li>
+            <li><a href="#about" class="hover:text-blue-300">About</a></li>
+            <li><a href="#services" class="hover:text-blue-300">Services</a></li>
+            <li><a href="#clients" class="hover:text-blue-300">Clients</a></li>
+            <li><a href="#contact" class="hover:text-blue-300">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact summary -->
+        <div>
+          <p class="text-sm font-semibold mb-2">Contact</p>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li class="flex items-start gap-2">
+              <i class="fas fa-map-marker-alt mt-[2px] text-[11px] text-slate-400"></i>
+              <span>No.401, Vraj Mangal Apartment, 11/1, Patel Colony</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="fas fa-phone-alt text-[11px] text-slate-400"></i>
+              <span>+91-XXXXXXXXXX</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="fas fa-envelope text-[11px] text-slate-400"></i>
+              <span>info@spengineering.com</span>
+            </li>
+          </ul>
+          <div class="mt-3 flex gap-3">
+            <a href="#" aria-label="LinkedIn"
+              class="h-7 w-7 flex items-center justify-center rounded-full border border-slate-700 hover:border-blue-400 hover:text-blue-300 transition">
+              <i class="fab fa-linkedin-in text-[11px]"></i>
+            </a>
+            <a href="#" aria-label="Email"
+              class="h-7 w-7 flex items-center justify-center rounded-full border border-slate-700 hover:border-blue-400 hover:text-blue-300 transition">
+              <i class="fas fa-envelope text-[11px]"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-slate-800 pt-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+        <p class="text-[11px] text-slate-500">&copy; <span id="yearSpan"></span> SP Engineering. All rights
+          reserved.</p>
+        <p class="text-[11px] text-slate-500">
+          Site design and implementation powered by modern web technologies.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="notification"
+    class="fixed top-4 right-4 z-50 hidden max-w-xs rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 shadow-lg shadow-slate-300/60">
+    <span id="notificationText"></span>
+  </div>
+
+  <!-- Back-to-top -->
+  <button id="backToTop"
+    class="fixed bottom-6 right-6 hidden bg-brand-blue text-white p-3 rounded-full shadow-lg">↑</button>
+
+  <!-- Scripts -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const scrollProgressEl = document.getElementById('scrollProgress');
+      const backToTopBtn = document.getElementById('backToTop');
+      const parallaxItems = document.querySelectorAll('[data-parallax]');
+      const magneticButtons = document.querySelectorAll('.magnetic-btn');
+      const tiltCards = document.querySelectorAll('.tilt-card');
+      const lazyImages = document.querySelectorAll('.lazy-image');
+
+      // Scroll handler: progress + back-to-top + parallax
+      window.addEventListener('scroll', () => {
+        const docH = document.documentElement.scrollHeight - window.innerHeight;
+        const sc = docH > 0 ? (window.scrollY / docH) * 100 : 0;
+        if (scrollProgressEl) {
+          scrollProgressEl.style.width = sc + '%';
+        }
+
+        if (backToTopBtn) {
+          if (window.scrollY > 100) backToTopBtn.classList.remove('hidden');
+          else backToTopBtn.classList.add('hidden');
+        }
+
+        const offset = window.scrollY;
+        parallaxItems.forEach((el) => {
+          const depth = parseFloat(el.getAttribute('data-parallax')) || 0;
+          const raw = offset * depth * -0.12;
+          const clamped = Math.max(Math.min(raw, 26), -26);
+          el.style.transform = `translateY(${clamped}px)`;
+        });
+      });
+
+      // Back-to-top click
+      if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      // Magnetic buttons
+      magneticButtons.forEach((btn) => {
+        btn.addEventListener('mousemove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          btn.style.transform = `translate(${x * 0.08}px, ${y * 0.08}px) scale(1.03)`;
+        });
+        btn.addEventListener('mouseleave', () => {
+          btn.style.transform = 'translate(0,0) scale(1)';
+        });
+      });
+
+      // Tilt card hover
+      tiltCards.forEach((card) => {
+        const maxTilt = 7;
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const midX = rect.width / 2;
+          const midY = rect.height / 2;
+          const rotateY = ((x - midX) / midX) * maxTilt;
+          const rotateX = ((midY - y) / midY) * maxTilt;
+          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'rotateX(0deg) rotateY(0deg) translateY(0)';
+        });
+      });
+
+      // Year in footer
+      document.getElementById("yearSpan").textContent = new Date().getFullYear();
+
+      // Lazy image loading
+      lazyImages.forEach((img) => {
+        if (img.complete) {
+          img.classList.add('loaded');
+        } else {
+          img.addEventListener('load', () => {
+            img.classList.add('loaded');
+          });
+        }
+      });
+
+      // Header color and shadow on scroll
+      const pageHeader = document.getElementById("pageHeader");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 80) {
+          pageHeader.classList.add("shadow-sm", "header-scrolled");
+          pageHeader.classList.remove("header-initial");
+        } else {
+          pageHeader.classList.remove("shadow-sm", "header-scrolled");
+          pageHeader.classList.add("header-initial");
+        }
+      });
+
+      // Mobile nav toggle
+      const navToggle = document.getElementById("navToggle");
+      const navMenuMobile = document.getElementById("navMenuMobile");
+
+      navToggle.addEventListener("click", () => {
+        const isHidden = navMenuMobile.classList.contains("hidden");
+        if (isHidden) {
+          navMenuMobile.classList.remove("hidden");
+        } else {
+          navMenuMobile.classList.add("hidden");
+        }
+
+        navToggle.innerHTML = navMenuMobile.classList.contains("hidden")
+          ? '<i class="fas fa-bars text-sm"></i>'
+          : '<i class="fas fa-times text-sm"></i>';
+      });
+
+      // Fade-in on scroll (PATCH 21)
+      const fadeSections = document.querySelectorAll(".fade-section");
+      const fadeObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              fadeObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+      fadeSections.forEach((el, index) => {
+        el.style.transitionDelay = `${index * 80}ms`;
+        fadeObserver.observe(el);
+      });
+
+      // Stats count-up
+      const statNumbers = document.querySelectorAll(".stat-number");
+      const statObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+              const target = parseInt(el.getAttribute("data-count"), 10) || 0;
+              let current = 0;
+              const duration = 1200;
+              const stepTime = 30;
+              const increment = target / (duration / stepTime);
+
+              const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                  current = target;
+                  clearInterval(timer);
+                }
+                el.textContent = Math.floor(current);
+              }, stepTime);
+
+              statObserver.unobserve(el);
+            }
+          });
+        },
+        { threshold: 0.6 }
+      );
+      statNumbers.forEach((el) => statObserver.observe(el));
+
+      // Toast Notification
+      function showNotification(message) {
+        const box = document.getElementById("notification");
+        const text = document.getElementById("notificationText");
+        text.textContent = message;
+        box.classList.remove("hidden");
+        box.classList.add("opacity-100");
+
+        setTimeout(() => {
+          box.classList.add("hidden");
+        }, 3500);
+      }
+
+      // Contact form validation
+      const contactForm = document.getElementById("contactForm");
+      contactForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const phoneInput = document.getElementById("phone");
+        const messageInput = document.getElementById("message");
+
+        const errName = document.getElementById("error-name");
+        const errEmail = document.getElementById("error-email");
+        const errPhone = document.getElementById("error-phone");
+        const errMessage = document.getElementById("error-message");
+
+        // Reset errors
+        [errName, errEmail, errPhone, errMessage].forEach(e => e.classList.add("hidden"));
+        [nameInput, emailInput, phoneInput, messageInput].forEach(i => i.classList.remove("border-rose-400"));
+
+        let valid = true;
+
+        if (!nameInput.value.trim()) {
+          errName.classList.remove("hidden");
+          nameInput.classList.add("border-rose-400");
+          valid = false;
+        }
+
+        const emailVal = emailInput.value.trim();
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailVal || !emailPattern.test(emailVal)) {
+          errEmail.classList.remove("hidden");
+          emailInput.classList.add("border-rose-400");
+          valid = false;
+        }
+
+        const phoneVal = phoneInput.value.trim();
+        if (phoneVal && phoneVal.length < 7) {
+          errPhone.textContent = "Phone number seems too short.";
+          errPhone.classList.remove("hidden");
+          phoneInput.classList.add("border-rose-400");
+          valid = false;
+        }
+
+        if (!messageInput.value.trim()) {
+          errMessage.classList.remove("hidden");
+          messageInput.classList.add("border-rose-400");
+          valid = false;
+        }
+
+        if (!valid) {
+          showNotification("Please fix the highlighted fields and try again.");
+          return;
+        }
+
+        showNotification(`Thank you, ${nameInput.value.trim()}! Your message has been sent.`);
+        contactForm.reset();
+      });
+    });
+  </script>
+</body>
+
+</html>
