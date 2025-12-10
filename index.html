@@ -1156,36 +1156,68 @@
         });
       }
 
-      // Magnetic buttons
-      magneticButtons.forEach((btn) => {
-        btn.addEventListener('mousemove', (e) => {
-          const rect = btn.getBoundingClientRect();
-          const x = e.clientX - rect.left - rect.width / 2;
-          const y = e.clientY - rect.top - rect.height / 2;
-          btn.style.transform = `translate(${x * 0.08}px, ${y * 0.08}px) scale(1.03)`;
-        });
-        btn.addEventListener('mouseleave', () => {
-          btn.style.transform = 'translate(0,0) scale(1)';
-        });
-      });
+      // Magnetic buttons + tilt cards (desktop + mobile)
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-      // Tilt card hover
-      tiltCards.forEach((card) => {
-        const maxTilt = 7;
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const midX = rect.width / 2;
-          const midY = rect.height / 2;
-          const rotateY = ((x - midX) / midX) * maxTilt;
-          const rotateX = ((midY - y) / midY) * maxTilt;
-          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+      if (!isTouchDevice) {
+        // Desktop / pointer devices: full magnetic + tilt effect
+        magneticButtons.forEach((btn) => {
+          btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            btn.style.transform = `translate(${x * 0.08}px, ${y * 0.08}px) scale(1.03)`;
+          });
+          btn.addEventListener('mouseleave', () => {
+            btn.style.transform = 'translate(0,0) scale(1)';
+          });
         });
-        card.addEventListener('mouseleave', () => {
-          card.style.transform = 'rotateX(0deg) rotateY(0deg) translateY(0)';
+
+        tiltCards.forEach((card) => {
+          const maxTilt = 7;
+          card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const midX = rect.width / 2;
+            const midY = rect.height / 2;
+            const rotateY = ((x - midX) / midX) * maxTilt;
+            const rotateX = ((midY - y) / midY) * maxTilt;
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+          });
+          card.addEventListener('mouseleave', () => {
+            card.style.transform = 'rotateX(0deg) rotateY(0deg) translateY(0)';
+          });
         });
-      });
+      } else {
+        // Mobile / touch devices: subtle tap animations
+        magneticButtons.forEach((btn) => {
+          btn.addEventListener('touchstart', () => {
+            btn.style.transform = 'translate(0, -2px) scale(1.04)';
+          }, { passive: true });
+          btn.addEventListener('touchend', () => {
+            btn.style.transform = 'translate(0,0) scale(1)';
+          });
+          btn.addEventListener('touchcancel', () => {
+            btn.style.transform = 'translate(0,0) scale(1)';
+          });
+        });
+
+        tiltCards.forEach((card) => {
+          card.addEventListener('touchstart', () => {
+            card.style.transform = 'translateY(-4px) scale(1.02)';
+            card.style.boxShadow = '0 18px 35px rgba(15, 23, 42, 0.22)';
+          }, { passive: true });
+          card.addEventListener('touchend', () => {
+            card.style.transform = 'translateY(0) scale(1)';
+            card.style.boxShadow = '';
+          });
+          card.addEventListener('touchcancel', () => {
+            card.style.transform = 'translateY(0) scale(1)';
+            card.style.boxShadow = '';
+          });
+        });
+      }
 
       // Year in footer
       document.getElementById("yearSpan").textContent = new Date().getFullYear();
